@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="jdbc:oracle:thin:@192.168.1.37:1521:orcl">
+		</property>
+		<property name="username" value="feixun"></property>
+		<property name="password" value="feixun"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.Oracle9Dialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/entity/TCcDimSuppliers.hbm.xml</value>
+				<value>com/entity/TCcDimAccount.hbm.xml</value>
+				<value>
+					com/entity/TCcDimensionMappingDetail.hbm.xml
+				</value>
+				<value>com/entity/TCcObjectalias.hbm.xml</value>
+				<value>com/entity/TCcObjecttype.hbm.xml</value>
+				<value>com/entity/TCcObject.hbm.xml</value>
+				<value>com/entity/TCcDimensionMapping.hbm.xml</value>
+				<value>com/entity/TCcDimCostcenter.hbm.xml</value>
+				<value>com/entity/TCcDimCurrency.hbm.xml</value>
+				<value>com/entity/TCcDimension.hbm.xml</value>
+				<value>com/entity/TCcDimensionitem.hbm.xml</value>
+				<value>com/entity/TCcDimOrganization.hbm.xml</value></list>
+		</property></bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" /><bean
+		id="TCcObjectDAO" class="com.dao.TCcObjectDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+</bean>
+	<bean id="TCcDimensionMappingDAO"
+		class="com.dao.TCcDimensionMappingDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimensionitemDAO"
+		class="com.dao.TCcDimensionitemDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimCurrencyDAO" class="com.dao.TCcDimCurrencyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcObjectaliasDAO" class="com.dao.TCcObjectaliasDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimOrganizationDAO"
+		class="com.dao.TCcDimOrganizationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimAccountDAO" class="com.dao.TCcDimAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimensionMappingDetailDAO"
+		class="com.dao.TCcDimensionMappingDetailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimCostcenterDAO"
+		class="com.dao.TCcDimCostcenterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcObjecttypeDAO" class="com.dao.TCcObjecttypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimSuppliersDAO" class="com.dao.TCcDimSuppliersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TCcDimensionDAO" class="com.dao.TCcDimensionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>
